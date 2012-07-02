@@ -1,9 +1,10 @@
-var zIndex = 0;
-
 $.extend({
   janela: function (opcoes){
     var padroes = {title:'Nova Janela',icon:false,width:1000,html:'',callback:false,help:false,top:35,onclose:function(){},btn_close:false,beforeClose:function(){},url:false,data:{}}
     var configs = $.extend(padroes,opcoes);
+
+    //definicao do zIndex
+    zIndex = typeof zIndex=='undefined'?0:zIndex;
     $('#conteudo_'+zIndex+' *[tabindex]').each(function(){$(this).attr({tabindexx : $(this).attr('tabindex')}).removeAttr('tabindex');});
 
     zIndex++;
@@ -16,7 +17,7 @@ $.extend({
     var indexform = zIndex+'2';
 
     var a   = $('<div></div>').attr({id:'janela'+zIndex}).addClass('ui-widget-overlay').css({'z-index':indexpele});
-    var g   = $("<div></div>").attr({id:'boxPele'+zIndex}).addClass("ui-dialog ui-widget ui-widget-content ui-corner-all").css({width:configs.width,left:pos,position:'absolute',top:configs.top,'z-index':indexform}).draggable({handle:'.ui-dialog-titlebar',containment:"#janela" + zIndex});
+    var g   = $("<div></div>").attr({id:'boxPele'+zIndex}).addClass("ui-dialog ui-widget ui-widget-content ui-corner-all").css({width:configs.width,left:pos,position:'absolute',top:configs.top,'z-index':indexform}).draggable({handle:'.ui-dialog-titlebar',containment:a});
     var cc  = $('<div></div>').attr({id:'conteudo_'+zIndex}).addClass("ui-dialog-content ui-widget-content").appendTo(g);
 
     var close = function(){
